@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+  <title id="title">CantoShield Mini context impact</title>
+  <desc id="desc">Baseline and context-assisted safety metrics for twenty synthetic Cantonese utterances.</desc>
+  <rect width="1000" height="540" fill="#ffffff" rx="18"/>
+  <text x="60" y="58" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="27" font-weight="700" fill="#0f172a">Context improves safety-critical recall</text>
+  <text x="60" y="92" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#0f766e">Insurance glossary context · paired comparison</text>
+  <text x="60" y="122" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="15" fill="#475569">20 synthetic utterances · one consenting speaker · clean audio · fixed model snapshot</text>
+  <g stroke="#e2e8f0">
+    <line x1="315" y1="155" x2="315" y2="430"/><line x1="435" y1="155" x2="435" y2="430"/>
+    <line x1="555" y1="155" x2="555" y2="430"/><line x1="675" y1="155" x2="675" y2="430"/>
+    <line x1="795" y1="155" x2="795" y2="430"/><line x1="915" y1="155" x2="915" y2="430"/>
+  </g>
+  <g font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="13" fill="#64748b" text-anchor="middle">
+    <text x="315" y="458">0%</text><text x="435" y="458">20%</text><text x="555" y="458">40%</text>
+    <text x="675" y="458">60%</text><text x="795" y="458">80%</text><text x="915" y="458">100%</text>
+  </g>
+  <g font-family="Arial,'Noto Sans CJK TC',sans-serif" fill="#1e293b">
+    <text x="60" y="212" font-size="17" font-weight="700">Case-level safety pass</text>
+    <text x="60" y="352" font-size="17" font-weight="700">Critical-concept recall</text>
+  </g>
+  <g font-family="Arial,'Noto Sans CJK TC',sans-serif">
+    <text x="305" y="190" text-anchor="end" font-size="14" fill="#475569">Baseline</text>
+    <rect x="315" y="169" width="510" height="30" rx="6" fill="#64748b"/>
+    <text x="835" y="190" font-size="15" font-weight="700" fill="#0f172a">85.0%</text>
+    <text x="305" y="232" text-anchor="end" font-size="14" fill="#475569">Context</text>
+    <rect x="315" y="211" width="570" height="30" rx="6" fill="#0f766e"/>
+    <text x="895" y="232" font-size="15" font-weight="700" fill="#0f172a">95.0%</text>
+    <text x="305" y="330" text-anchor="end" font-size="14" fill="#475569">Baseline</text>
+    <rect x="315" y="309" width="562.8" height="30" rx="6" fill="#64748b"/>
+    <text x="887.8" y="330" font-size="15" font-weight="700" fill="#0f172a">93.8%</text>
+    <text x="305" y="372" text-anchor="end" font-size="14" fill="#475569">Context</text>
+    <rect x="315" y="351" width="587.4" height="30" rx="6" fill="#0f766e"/>
+    <text x="912.4" y="372" font-size="15" font-weight="700" fill="#0f172a">97.9%</text>
+  </g>
+  <text x="60" y="505" font-family="Arial,sans-serif" font-size="13" fill="#64748b">Descriptive pilot only · one speaker · 20 utterances · clean audio · not a production accuracy claim</text>
+</svg>

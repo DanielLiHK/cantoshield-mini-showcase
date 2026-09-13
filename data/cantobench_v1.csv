@@ -1,0 +1,21 @@
+id,cantonese,english,risk_tags
+U01,"呢份 plan 個共同保險係兩成，即係百分之二十，唔係百分之二，啱唔啱？","The coinsurance is 20%, not 2%, correct?","percentage|negation|code-switch"
+U02,"個墊底費係三萬蚊，唔係三千蚊，係咪呀？","The deductible is HK$30,000, not HK$3,000, correct?","money|negation"
+U03,"你話每年保額係八十萬，唔係終身得八十萬，啱唔啱？","You said the annual limit is HK$800,000, not a lifetime limit, correct?","money|scope|negation"
+U04,"我張醫院單係十二萬零五百蚊，係咪成張單都可以 claim？","My hospital bill is HK$120,500. Can I claim the whole amount?","complex-money|code-switch"
+U05,"個手術保障上限係十五萬，定係五十萬？你幫我 check 清楚呀。","Is the surgical limit HK$150,000 or HK$500,000?","confusable-money|code-switch"
+U06,"我份保單係二零二六年六月二十一號先開始生效。","My policy becomes effective on 21 June 2026.",date
+U07,"個保單年度由四月一號開始，到下年三月三十一號完，係咪？","Does the policy year run from 1 April to 31 March?",date-range
+U08,"個等候期究竟係三十日，定十三日呀？","Is the waiting period 30 days or 13 days?",confusable-number
+U09,"最高投保年齡係八十歲，唔係十八歲呀。","The maximum entry age is 80, not 18.","confusable-number|negation"
+U10,"我上次覆診係二月二十八號，唔係八月二十二號。","My last follow-up was on 28 February, not 22 August.","confusable-date|negation"
+U11,"你係咪話今次個 claim 未必批，唔係一定有得賠？","Are you saying this claim may not be approved?","negation|overpromise|code-switch"
+U12,"醫生話唔使留院過夜，做日間手術就得。","The doctor said an overnight stay was unnecessary; day surgery would be sufficient.","negation|insurance-term"
+U13,"呢筆醫療費係咪合資格費用，要睇返保單條款先知？","Do we need to check the policy before treating this as an eligible expense?",insurance-term
+U14,"個別不保項目同一般不保事項，係兩樣嘢嚟㗎，係咪？","Individual and general exclusions are different, correct?",confusable-terms
+U15,"保單入面寫訂明診斷成像檢測，即係包唔包括 MRI 呀？","Does prescribed diagnostic imaging include MRI?","long-term|code-switch"
+U16,"份報告寫嘅係 PET-CT，唔係普通 CT scan。","The report says PET-CT, not an ordinary CT scan.","medical-term|negation|code-switch"
+U17,"呢個 plan 要畀 twenty percent coinsurance，仲有三萬蚊 deductible。","This plan has 20% coinsurance and a HK$30,000 deductible.","percentage|money|code-switch"
+U18,"今次只係普通覆診，唔係跟進 pre-existing condition。","This is an ordinary follow-up, not follow-up for a pre-existing condition.","negation|code-switch"
+U19,"醫生話要做 chemo 同標靶治療，暫時唔使做免疫治療。","The doctor recommended chemotherapy and targeted therapy, but not immunotherapy for now.","medical-terms|negation|code-switch"
+U20,"如果你聽唔清楚係保障定唔保障，你問多我一次先。","If you cannot tell whether I said covered or not covered, ask me again.","negation|safety-confirmation"

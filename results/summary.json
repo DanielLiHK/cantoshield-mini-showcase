@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "model_snapshot": "qwen3-asr-flash-2026-02-10",
+  "region": "Singapore",
+  "utterances": 20,
+  "speaker_count": 1,
+  "audio_condition": "clean",
+  "baseline": {
+    "case_pass_rate": 85.0,
+    "cases_passed": 17,
+    "concept_recall": 93.8,
+    "concepts_matched": 45,
+    "concepts_total": 48
+  },
+  "context_assisted": {
+    "case_pass_rate": 95.0,
+    "cases_passed": 19,
+    "concept_recall": 97.9,
+    "concepts_matched": 47,
+    "concepts_total": 48
+  },
+  "context_impact": {
+    "improved_cases": 2,
+    "unchanged_cases": 18,
+    "regressed_cases": 0
+  },
+  "safe_next_actions": {
+    "CONFIRM_ENTITIES": 13,
+    "ASK_CLARIFICATION": 6,
+    "REFER_TO_HUMAN": 1
+  },
+  "limitation": "Descriptive pilot only; not a population-level or production accuracy claim."
+}
