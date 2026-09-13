@@ -1,42 +1,40 @@
-# 運作流程｜How it works
+# 運作方式｜How it works
 
-## 1. 同一段聲音，公平比較｜Paired comparison
+## 1. 配對比較｜Paired comparison
 
-每段聲音以完全相同模型同參數處理兩次。唯一實驗變數係有冇加入精簡香港保險術語 context。
+每段聲音以同一模型同設定處理兩次，唯一實驗變數係有冇加入精簡香港保險術語 context。
 
-Each audio item is processed twice with the same model and settings. The only experimental variable is the glossary context.
+Each audio item is processed twice with the same model and settings. The only experimental variable is whether the short Hong Kong insurance glossary is supplied.
 
-## 2. 保留原始輸出｜Preserve raw evidence
+## 2. 保留原始意思｜Preserve the original meaning
 
-研究流程唔會用 LLM 潤飾 transcript。正規化只用於評分，唔會覆蓋原始輸出。
+顯示嘅轉錄唔會經 LLM 潤飾。正規化只用於離線評分，唔會覆蓋模型原始輸出。
 
-The research pipeline never asks an LLM to polish a transcript. Normalisation is a separate comparison layer and never overwrites evidence.
+The displayed transcript is never polished by an LLM. Normalisation is used only for offline scoring and never overwrites the model output.
 
-## 3. EntityGuard 分流｜Safety routing
+## 3. 安全分流｜Safety routing
 
-EntityGuard 檢查金額、百分比、日期、年齡、否定詞、claim certainty、保障語意同保險／醫療術語，再輸出三種狀態：
-
-EntityGuard detects high-risk content and produces one of three states:
+EntityGuard 檢查金額、百分比、日期、年齡、否定詞、claim certainty、保障語意及保險／醫療術語。EntityGuard checks high-risk content and returns one of three next actions.
 
 ```mermaid
-stateDiagram-v2
-    [*] --> Inspect
-    Inspect --> CONFIRM_ENTITIES: critical content present
-    Inspect --> ASK_CLARIFICATION: missing or ambiguous
-    Inspect --> REFER_TO_HUMAN: mismatch or failed benchmark
-    CONFIRM_ENTITIES --> [*]: human confirms
-    ASK_CLARIFICATION --> Inspect: speaker answers again
-    REFER_TO_HUMAN --> [*]: authorised review
+flowchart TD
+    A["檢查轉錄<br/>Inspect transcript"] --> B{"安全狀態<br/>Safety state"}
+    B --> C["確認關鍵資料<br/>Confirm entities"]
+    B --> D["再次澄清<br/>Ask clarification"]
+    B --> E["轉交人手<br/>Refer to human"]
 ```
 
-## 4. 離線 gold-aware 評估｜Offline benchmark
+三個狀態都唔會作出保障、承保或理賠決定。None of the three states makes a coverage, underwriting or claim decision.
 
-Runtime guard 唔知道講者原本應該講乜。如果 Baseline 同 Context 一齊錯，兩者比較可能產生假安全感。離線 CantoBench 因此用預先定義概念檢查共同失敗，例如 U15。
+## 4. 捕捉共同錯誤｜Catch shared errors
 
-The runtime guard cannot know the intended sentence. An offline gold-aware benchmark is required to catch shared failures where both ASR conditions agree on the wrong term.
+單靠比較 Baseline 同 Context 仍然可能漏錯，因為兩邊可以一齊聽錯。離線 benchmark 會用預先定義嘅概念檢查共同失敗，例如 U15。
 
-## 5. 人手仍然係控制點｜Human oversight remains mandatory
+Comparing Baseline with Context can still miss an error when both outputs are wrong. The offline benchmark checks pre-declared concepts to catch shared failures such as U15.
 
-三個狀態都唔會直接產生保障、理賠或承保決定。即使 transcript 經確認，仍要按正式保單條款同既定業務流程處理。
+## 5. 人手控制點｜Human control point
 
-None of the three states authorises a coverage, claim or underwriting decision. Verified transcription and insurance adjudication are separate tasks.
+確認轉錄同判斷保險資格係兩個獨立步驟。即使文字經確認，仍要按正式保單條款同獲授權業務流程處理。
+
+Transcript confirmation and insurance adjudication are separate tasks. Even confirmed text must still be handled under the formal policy wording and authorised business process.
+

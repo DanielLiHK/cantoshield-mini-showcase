@@ -2,43 +2,52 @@
 
 ## 主要發現｜Key finding
 
-| Metric | Baseline | Context-assisted | Difference |
+| 指標 Metric | Baseline | Context-assisted | 差異 Difference |
 |---|---:|---:|---:|
-| Safety-critical concept recall | 93.8% (45/48) | **97.9% (47/48)** | +4.1 percentage points |
-| Case-level safety pass | 85.0% (17/20) | **95.0% (19/20)** | +10.0 percentage points |
-| Completed transcripts | 20/20 | 20/20 | — |
-
-Context-assisted ASR improved two of the 20 cases and caused no safety-concept regression in this dataset. Eighteen cases were unchanged at the semantic safety level.
+| 關鍵概念保留率 Safety-critical concept recall | 93.8% (45/48) | **97.9% (47/48)** | +4.1 percentage points |
+| 每句安全通過率 Case-level safety pass | 85.0% (17/20) | **95.0% (19/20)** | +10.0 percentage points |
+| 完成轉錄 Completed transcripts | 20/20 | 20/20 | — |
 
 加入保險術語 context 後，20句入面有2句喺安全概念層面得到改善，18句維持不變，冇出現關鍵概念倒退。
 
+With insurance glossary context, two of 20 cases improved at the safety-concept level, 18 were unchanged and none regressed.
+
 ## 評分單位｜Unit of scoring
 
-研究先為每句定義安全概念，例如：
+每句都有事先定義嘅安全概念及可接受同義形式。所有預期概念都出現，該句先算通過。評估器唔會修改或修補 ASR 輸出。
 
-- `20%` 同「兩成」視為同一概念；
-- 「三萬蚊」同 `HKD 30,000` 視為同一概念；
-- `pre-existing condition` 必須保留 `pre-` 範圍；
-- `唔保障` 唔可以同 `保障` 當成一樣。
+Each utterance has pre-declared safety concepts and accepted meaning-preserving aliases. A case passes only when every expected concept is present. The evaluator does not edit or repair ASR output.
 
-Each utterance has pre-declared concepts and accepted meaning-preserving aliases. A case passes only when every expected concept is found. The evaluator does not edit or repair the ASR output.
+| 例子 Example | 評分原則 Scoring rule |
+|---|---|
+| `20%`／「兩成」 | 視為同一概念 / Treated as the same concept |
+| 「三萬蚊」／`HKD 30,000` | 視為同一金額 / Treated as the same amount |
+| `pre-existing condition` | 必須保留 `pre-` 範圍 / The `pre-` scope must be preserved |
+| `唔保障`／`保障` | 唔可以視為相同 / Must not be treated as equivalent |
 
-## Context-assisted routing result
+## 安全分流結果｜Safety-routing result
 
-| Safe next action | Cases | Meaning |
-|---|---:|---|
-| `CONFIRM_ENTITIES` | 13 | Show critical content and obtain explicit confirmation |
-| `ASK_CLARIFICATION` | 6 | Ask again because alternatives, uncertainty or polarity matter |
-| `REFER_TO_HUMAN` | 1 | Stop automation because an expected formal term is missing |
+| 下一步 Safe next action | 個案 Cases | 中文意思 | English meaning |
+|---|---:|---|---|
+| `CONFIRM_ENTITIES` | 13 | 顯示關鍵內容並取得明確確認 | Show critical content and obtain explicit confirmation |
+| `ASK_CLARIFICATION` | 6 | 因替代選項、不確定性或極性而再次提問 | Ask again because alternatives, uncertainty or polarity matter |
+| `REFER_TO_HUMAN` | 1 | 因預期正式術語缺失而停止自動處理 | Stop automation because an expected formal term is missing |
 
-## Interpretation
+## 結果解讀｜Interpretation
 
-Context improved domain and code-switch recognition, especially where a small modifier or treatment term changed meaning. It did not improve every formal term. The result supports **context plus human oversight**, not autonomous insurance use.
+Context 對專業術語同中英夾雜有幫助，但唔能夠取代人手確認。結論唔係「ASR已經安全」，而係「context可以減少部分錯誤，而 guard 必須處理剩餘風險」。
 
-Context 對專業術語同中英夾雜有幫助，但唔能夠取代人手確認。研究結論唔係「ASR已經安全」，而係「context可以減少部分錯誤，而 guard 必須處理剩餘風險」。
+Context helped with domain terminology and code-switching, but it cannot replace human confirmation. The conclusion is not that ASR is safe; it is that context can reduce some errors while the guard must handle residual risk.
 
-## Scope
+## 測試範圍｜Scope
 
-The experiment used one consenting speaker, 20 synthetic utterances, clean audio, a Singapore endpoint and the fixed snapshot `qwen3-asr-flash-2026-02-10`. These descriptive results are not confidence intervals, fairness measurements or production benchmarks.
+| 項目 Item | 測試設定 Test setting |
+|---|---|
+| 語音 Speech | 一位自願參與者、20句合成香港廣東話 / One consenting speaker and 20 synthetic Hong Kong Cantonese utterances |
+| 環境 Environment | 安靜錄音 / Clean audio |
+| 模型 Model | `qwen3-asr-flash-2026-02-10` |
+| Region | Singapore |
+| 結論限制 Claim boundary | 描述性 pilot；唔係信賴區間、公平性量度或 production benchmark / Descriptive pilot; not a confidence interval, fairness measure or production benchmark |
 
-Machine-readable, de-identified outputs are available in [`results/`](../results/).
+去識別化 machine-readable 結果可喺 [`results/`](../results/) 查看。De-identified machine-readable outcomes are available in [`results/`](../results/).
+

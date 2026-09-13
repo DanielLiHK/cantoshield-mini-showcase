@@ -1,21 +1,26 @@
 # 失敗案例｜Failure cases
 
-## 點解展示失敗比只展示分數重要
+## 點解要展示失敗｜Why failures are shown
 
-一個高平均分可以遮住少量但嚴重嘅語意錯誤。以下案例使用合成測試內容，展示 context 有效同無效嘅邊界。
+高平均分可以遮住少量但嚴重嘅語意錯誤。以下合成案例同時展示 context 有效同無效嘅邊界。
 
 A high average score can hide rare but consequential meaning changes. These synthetic cases show both the value and the limit of context.
 
-| ID | Baseline | Context-assisted | User impact / 用家風險 |
+| ID | Baseline 結果 | Context-assisted 結果 | 用家風險 User impact |
 |---|---|---|---|
-| U15 | `定名診斷成像檢測` | `定明診斷成像檢測` | Both miss `訂明診斷成像檢測`; stop and refer to a human / 兩邊同錯，必須人手覆核 |
-| U18 | Drops `pre-` from `pre-existing condition` | Restores full phrase | Missing scope can change medical-history meaning / 遺漏範圍字會改變已有病語意 |
-| U19 | `chemo` becomes unrelated `劇霧` | Recovers `化療` | A treatment entity is lost in Baseline / Baseline 遺失治療項目 |
+| U15 | `定名診斷成像檢測` | `定明診斷成像檢測` | 兩邊都錯過 `訂明診斷成像檢測`，必須停止並轉交人手。 / Both miss the expected formal term, so automation must stop for human review. |
+| U18 | 遺漏 `pre-existing condition` 嘅 `pre-` / Drops `pre-` | 恢復完整詞語 / Restores the full phrase | 遺漏範圍字可能改變已有病相關意思。 / Missing the scope modifier can change the medical-history meaning. |
+| U19 | `chemo` 變成無關詞語 `劇霧` / Becomes unrelated `劇霧` | 恢復為 `化療` / Recovers `化療` | Baseline 遺失咗治療項目。 / Baseline loses a treatment entity. |
 
-## Presentation improvements, not safety gains
+## 表達改善而非安全增益｜Presentation improvements, not safety gains
 
-U10 (`復診` → `覆診`) and U17 (`co insurance` → `coinsurance`) are clearer Hong Kong/domain forms, but the semantic alias scorer treats both Baseline forms as meaning-preserving. They are not counted as safety improvements.
+U10（`復診` → `覆診`）同 U17（`co insurance` → `coinsurance`）更符合香港或專業寫法，但兩組 Baseline 用語都冇改變意思，所以唔計作安全增益。
 
-## Main lesson / 主要結論
+U10 (`復診` → `覆診`) and U17 (`co insurance` → `coinsurance`) improve Hong Kong or domain presentation, but the Baseline forms preserve meaning and therefore do not count as safety gains.
 
-如果 Baseline 同 Context 一齊聽錯，單靠比較兩者會產生假安全感。Shared errors require an offline gold-aware benchmark plus human audio review.
+## 主要結論｜Main lesson
+
+如果 Baseline 同 Context 一齊聽錯，單靠比較兩者會產生假安全感，因此需要預先定義答案嘅離線 benchmark 配合人手聽音覆核。
+
+If Baseline and Context are both wrong, comparing them can create false confidence. A pre-declared offline benchmark and human audio review are both required.
+
